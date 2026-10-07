@@ -40,7 +40,7 @@ class AuthController extends Controller
         }
 
         if ($user->is_blocked) {
-            return response()->json(['message' => 'Your account has been blocked. Contact support.'], 403);
+            abort_if($user->is_blocked, 403, 'Your account has been blocked. Contact support.');
         }
 
         return response()->json([

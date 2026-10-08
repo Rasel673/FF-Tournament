@@ -10,8 +10,9 @@ use App\Http\Controllers\Api\WalletController;
 use Illuminate\Support\Facades\Route;
 
 // Public
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('send-otp', [AuthController::class, 'sendOtp'])->middleware('throttle:5,1');
+Route::post('register', [AuthController::class, 'register'])->middleware('throttle:10,1');
+Route::post('login', [AuthController::class, 'login'])->middleware('throttle:10,1');
 
 // Needs header:  Authorization: Bearer <token>
 Route::middleware('auth:sanctum')->group(function () {

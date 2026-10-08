@@ -18,6 +18,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(IsAdmin::class)->group(function () {
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::put('password', [AuthController::class, 'updatePassword'])->name('password.update');
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::resource('tournaments', TournamentController::class)->except('show');

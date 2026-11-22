@@ -1,0 +1,18 @@
+$kind: http-request
+description: Returns match cards with Match Number, Map, Type, Prize, Per Kill, Entry, Slots Progress Bar, and STARTS IN countdown.
+url: "{{baseUrl}}/api/tournaments?status=active"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: status
+    value: active
+  - key: category_id
+    value: "1"
+    disabled: true
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 1000

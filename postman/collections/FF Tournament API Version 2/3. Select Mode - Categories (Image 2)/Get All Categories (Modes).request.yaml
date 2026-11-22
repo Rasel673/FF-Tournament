@@ -1,0 +1,8 @@
+$kind: http-request
+description: Returns grid of game modes (PRO LEAGUE, SURVIVAL, CS 4 VS 4, etc.) with image_url, title, and matches_label ('27 matches available').
+url: "{{baseUrl}}/api/categories"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+order: 1000

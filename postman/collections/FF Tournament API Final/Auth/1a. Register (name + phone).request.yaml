@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{base_url}}/register"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: formdata
+  content:
+    - type: text
+      key: name
+      value: Rasel Amin
+    - type: text
+      key: phone
+      value: "01745027144"
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200 || pm.response.code === 201) {
+        pm.collectionVariables.set('token', pm.response.json().token);
+      }
+    language: text/javascript
+settings: {}
+order: 2000

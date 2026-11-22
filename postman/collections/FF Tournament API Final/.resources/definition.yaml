@@ -1,0 +1,12 @@
+$kind: collection
+description: "Free Fire tournament app API. Auth uses SMS OTP: send-otp, then register or login with the code (with SMS_DRIVER=log the code is in storage/logs/laravel.log). Login/register save the token automatically."
+variables:
+  base_url: http://localhost:8000/api
+  token: ""
+  tournament_id: "1"
+auth:
+  - id: 86fe2536-0a16-4db1-96fa-4b8021498f20
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

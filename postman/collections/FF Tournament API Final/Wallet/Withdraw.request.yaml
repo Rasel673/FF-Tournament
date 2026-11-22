@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{base_url}}/wallet/withdraw"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "amount": 50,
+      "method": "bKash",
+      "account_number": "01712345678"
+    }
+settings: {}
+order: 3000

@@ -1,0 +1,13 @@
+$kind: http-request
+name: Join Match / Tournament
+description: Deducts entry fee and registers player to the match. Returns updated match details with room info.
+url: "{{baseUrl}}/api/tournaments/1/join"
+method: POST
+headers:
+  Accept: application/json
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 3000

@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{baseUrl}}/api/profile"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+            
+            "name": "Rasel Amin",
+            "uid": "831505550",
+            "phone": "015679428550",
+            "avatar": null"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 2000

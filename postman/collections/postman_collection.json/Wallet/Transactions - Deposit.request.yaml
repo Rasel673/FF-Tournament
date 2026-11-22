@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/transactions?type=deposit"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  type: deposit
+settings: {}
+order: 5000

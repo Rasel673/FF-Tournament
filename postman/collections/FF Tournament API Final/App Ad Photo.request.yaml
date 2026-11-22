@@ -1,0 +1,4 @@
+$kind: http-request
+url: https://fftournament.landingbd.top/api/photo
+method: GET
+order: 6000

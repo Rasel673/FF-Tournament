@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/api/banners"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+order: 1000

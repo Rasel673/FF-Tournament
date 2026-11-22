@@ -1,0 +1,14 @@
+$kind: http-request
+description: Returns all tournaments under that specific mode/category.
+url: "{{baseUrl}}/api/categories/1/tournaments?status=active"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  status: active
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 3000

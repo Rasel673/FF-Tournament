@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{base_url}}/register"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "name": "Test Player",
+      "phone": "01800000000",
+      "password": "secret123"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 201) {
+        pm.collectionVariables.set('token', pm.response.json().token);
+      }
+    language: text/javascript
+settings: {}
+order: 1000

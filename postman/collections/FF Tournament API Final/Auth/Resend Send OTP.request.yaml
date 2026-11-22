@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{base_url}}/send-otp"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "phone": "01567942853",
+      "purpose": "login"
+    }
+settings: {}
+order: 1000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/transactions?type=withdraw"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  type: withdraw
+settings: {}
+order: 6000

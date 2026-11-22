@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/resend-otp"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "phone": "01567342853",
+        "purpose": "register"
+    }
+settings: {}
+order: 2000

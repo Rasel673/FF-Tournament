@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{base_url}}/verify-otp"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "phone": "01567942853",
+      "otp": "353819"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200 || pm.response.code === 201) {
+        pm.collectionVariables.set('token', pm.response.json().token);
+      }
+    language: text/javascript
+settings: {}
+order: 4000

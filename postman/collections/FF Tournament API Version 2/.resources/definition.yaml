@@ -1,0 +1,7 @@
+$kind: collection
+description: Complete Postman collection for FF Tournament App API matching all app UI screens (Home, Select Mode, Match Cards, Prize Pool Sheet, and Join Details).
+variables:
+  baseUrl: http://localhost
+  token: ""
+  token_live: ""
+  toke_local: ""

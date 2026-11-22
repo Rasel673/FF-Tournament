@@ -1,0 +1,8 @@
+$kind: http-request
+name: Home (user + active/upcoming tournaments)
+url: "{{base_url}}/home"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+order: 1000

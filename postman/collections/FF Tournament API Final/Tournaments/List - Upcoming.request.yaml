@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/tournaments?status=upcoming"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  status: upcoming
+settings: {}
+order: 3000

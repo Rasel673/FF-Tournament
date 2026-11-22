@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/transactions?type=tournament"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  type: tournament
+settings: {}
+order: 7000

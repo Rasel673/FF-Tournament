@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/api/transactions"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 4000

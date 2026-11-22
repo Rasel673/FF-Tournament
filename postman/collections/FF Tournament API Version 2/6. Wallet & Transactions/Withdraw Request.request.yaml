@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/wallet/withdraw"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "payment_method_id": 1,
+        "amount": 100,
+        "account_number": "01712345678"
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 3000

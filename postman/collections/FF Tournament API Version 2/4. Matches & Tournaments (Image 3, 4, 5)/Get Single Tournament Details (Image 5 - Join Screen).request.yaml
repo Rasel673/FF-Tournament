@@ -1,0 +1,12 @@
+$kind: http-request
+description: "Returns full match screen: WINNING PRIZE, PER KILL, ENTRY FEE, Prize Pool distribution array (for Image 4 sheet), WATCH TUTORIAL VIDEO url, and RULES list."
+url: "{{baseUrl}}/api/tournaments/1"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 2000

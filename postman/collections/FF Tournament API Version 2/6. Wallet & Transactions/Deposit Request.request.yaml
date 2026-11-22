@@ -1,0 +1,22 @@
+$kind: http-request
+url: "{{baseUrl}}/api/wallet/deposit"
+method: POST
+headers:
+  Accept: application/json
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+        "method": 5,
+        "amount": 100,
+        "sender_number": "01833025822",
+        "trx": "TRX987654321",
+        "screenshot": ""
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 2000

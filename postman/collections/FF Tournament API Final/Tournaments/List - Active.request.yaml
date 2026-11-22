@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{base_url}}/tournaments?status=active"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  status: active
+settings: {}
+order: 2000

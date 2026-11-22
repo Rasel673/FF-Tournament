@@ -1,0 +1,13 @@
+$kind: collection
+name: FF Tournament API
+description: "Free Fire tournament app API. Run Login first: it saves the token automatically. Change base_url if your server is not on localhost:8000."
+variables:
+  base_url: http://localhost:8000/api
+  token: ""
+  tournament_id: "1"
+auth:
+  - id: 4886102a-c07c-4709-9d02-a730308f6a09
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{token}}"

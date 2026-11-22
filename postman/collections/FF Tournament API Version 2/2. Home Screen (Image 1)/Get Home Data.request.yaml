@@ -1,0 +1,12 @@
+$kind: http-request
+description: Returns User (name, uid, balance), Banners carousel, Customer Support info, Featured Game banner, Categories/Modes, and Active matches.
+url: "{{baseUrl}}/api/home"
+method: GET
+headers:
+  Accept: application/json
+auth:
+  type: bearer
+  credentials:
+    token: "{{token}}"
+settings: {}
+order: 1000

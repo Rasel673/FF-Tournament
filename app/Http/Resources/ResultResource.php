@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class ResultResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'position' => $this->position,
+            'kills' => $this->kills,
+            'prize' => $this->prize,
+            'player' => [
+                'name' => $this->user?->name,
+                'uid' => $this->user?->uid,
+            ],
+        ];
+    }
+}

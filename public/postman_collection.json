@@ -1,0 +1,1016 @@
+{
+	"info": {
+		"_postman_id": "ff-tournament-api-collection",
+		"name": "FF Tournament API",
+		"description": "Complete Postman collection for FF Tournament App API matching all app UI screens (Home, Select Mode, Match Cards, Prize Pool Sheet, and Join Details).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Send OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"01812345678\",\n    \"purpose\": \"register\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/send-otp",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "send-otp"]
+						}
+					}
+				},
+				{
+					"name": "Resend OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"01812345678\",\n    \"purpose\": \"register\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/resend-otp",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "resend-otp"]
+						}
+					}
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.collectionVariables.set('token', jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mokarom\",\n    \"phone\": \"01812345678\",\n    \"password\": \"password123\",\n    \"password_confirmation\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "register"]
+						}
+					}
+				},
+				{
+					"name": "Verify OTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.collectionVariables.set('token', jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"01812345678\",\n    \"otp\": \"123456\",\n    \"purpose\": \"register\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/verify-otp",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "verify-otp"]
+						}
+					}
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.collectionVariables.set('token', jsonData.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone\": \"01812345678\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "login"]
+						}
+					}
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/logout",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "logout"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Home Screen (Image 1)",
+			"item": [
+				{
+					"name": "Get Home Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/home",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "home"]
+						},
+						"description": "Returns User (name, uid, balance), Banners carousel, Customer Support info, Featured Game banner, Categories/Modes, and Active matches."
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Select Mode / Categories (Image 2)",
+			"item": [
+				{
+					"name": "Get All Categories (Modes)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "categories"]
+						},
+						"description": "Returns grid of game modes (PRO LEAGUE, SURVIVAL, CS 4 VS 4, etc.) with image_url, title, and matches_label ('27 matches available')."
+					}
+				},
+				{
+					"name": "Get Single Category",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "categories", "1"]
+						}
+					}
+				},
+				{
+					"name": "Get Matches Under Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/categories/1/tournaments?status=active",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "categories", "1", "tournaments"],
+							"query": [
+								{
+									"key": "status",
+									"value": "active"
+								}
+							]
+						},
+						"description": "Returns all tournaments under that specific mode/category."
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Matches & Tournaments (Image 3, 4, 5)",
+			"item": [
+				{
+					"name": "Get Tournaments List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments?status=active",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "tournaments"],
+							"query": [
+								{
+									"key": "status",
+									"value": "active"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Returns match cards with Match Number, Map, Type, Prize, Per Kill, Entry, Slots Progress Bar, and STARTS IN countdown."
+					}
+				},
+				{
+					"name": "Get Single Tournament Details (Image 5 - Join Screen)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "tournaments", "1"]
+						},
+						"description": "Returns full match screen: WINNING PRIZE, PER KILL, ENTRY FEE, Prize Pool distribution array (for Image 4 sheet), WATCH TUTORIAL VIDEO url, and RULES list."
+					}
+				},
+				{
+					"name": "Join Match / Tournament",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/tournaments/1/join",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "tournaments", "1", "join"]
+						},
+						"description": "Deducts entry fee and registers player to the match. Returns updated match details with room info."
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Banners & Pictures Carousel (Image 1)",
+			"item": [
+				{
+					"name": "Get All Banners",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/banners",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "banners"]
+						}
+					}
+				},
+				{
+					"name": "Get Single Banner",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/banners/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "banners", "1"]
+						}
+					}
+				},
+				{
+					"name": "Upload Banner via API",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "title",
+									"value": "Deposit Tutorial Banner",
+									"type": "text"
+								},
+								{
+									"key": "link_url",
+									"value": "https://example.com/deposit-tutorial",
+									"type": "text"
+								},
+								{
+									"key": "order",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/banners",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "banners"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "6. Wallet & Transactions",
+			"item": [
+				{
+					"name": "Get Wallet Info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/wallet",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "wallet"]
+						}
+					}
+				},
+				{
+					"name": "Deposit Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"method\": 5,\n    \"amount\": 100,\n    \"sender_number\": \"01833025822\",\n    \"trx\": \"TRX987654321\",\n    \"screenshot\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/wallet/deposit",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "wallet", "deposit"]
+						}
+					}
+				},
+				{
+					"name": "Withdraw Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"payment_method_id\": 1,\n    \"amount\": 100,\n    \"account_number\": \"01712345678\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/wallet/withdraw",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "wallet", "withdraw"]
+						}
+					}
+				},
+				{
+					"name": "Get Transactions History",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/transactions",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "transactions"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "7. Profile & Support",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mokarom Updated\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/profile",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "profile"]
+						}
+					}
+				},
+				{
+					"name": "Get Customer Support Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/support",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "support"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "8. Notifications",
+			"item": [
+				{
+					"name": "Get Notifications List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/notifications",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "notifications"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "9. Moderator System",
+			"item": [
+				{
+					"name": "Apply for Moderator (Min 5 Tournaments)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"note\": \"Active tournament player ready to arrange matches and manage rooms.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/apply",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "apply"]
+						}
+					}
+				},
+				{
+					"name": "Check Moderator Status & Eligibility",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "status"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Get Assigned Tournaments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/tournaments",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "tournaments"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Arrange New Tournament",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"MODERATOR SPECIAL SCRIM\",\n    \"category_id\": 1,\n    \"map\": \"Bermuda\",\n    \"type\": \"Squad\",\n    \"entry_fee\": 10,\n    \"prize\": 390,\n    \"per_kill\": 0,\n    \"slots\": 48,\n    \"start_time\": \"2026-11-27 20:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/tournaments",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "tournaments"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Set Room ID & Password (Auto-Notify Players)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"room_id\": \"98765432\",\n    \"room_password\": \"ffroom2026\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/tournaments/1/room",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "tournaments", "1", "room"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Publish Results & Complete Payments (Earn Commission)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"results\": [\n        {\n            \"user_id\": 1,\n            \"position\": 1,\n            \"kills\": 6,\n            \"prize\": 160\n        }\n    ],\n    \"result_note\": \"Fair play certified by Moderator.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/tournaments/1/results",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "tournaments", "1", "results"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Earnings & Commission Balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/earnings",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "earnings"]
+						}
+					}
+				},
+				{
+					"name": "Moderator - Withdraw Commission Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"method\": \"bKash\",\n    \"account_number\": \"01833025822\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/moderator/withdraw",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "moderator", "withdraw"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
+

@@ -1,0 +1,10 @@
+workspace:
+  id: be7de73f-da25-494d-8c90-da3280e8e6a2
+localResources:
+  collections:
+    - ../public/postman_collection.json
+cloudResources:
+  collections:
+    ../postman/collections/FF Tournament API Version 2: 31695211-07c3c4cb-178c-4039-b699-ef6a8458e742
+    ../postman/collections/FF Tournament API Final: 31695211-7d1e62ec-db5f-499a-8391-c4e0b69db6a1
+    ../postman/collections/postman_collection.json: 31695211-63872a78-123c-4f07-8791-a6fa15f7e6a3

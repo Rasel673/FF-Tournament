@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /ff-tournament/
+
+    # If already in public, do not rewrite
+    RewriteCond %{REQUEST_URI} ^/ff-tournament/public [NC]
+    RewriteRule ^ - [L]
+
+    # Rewrite uploads and storage
+    RewriteRule ^uploads/(.*)$ public/uploads/$1 [L]
+    RewriteRule ^storage/(.*)$ public/storage/$1 [L]
+
+    # Redirect all requests to public/
+    RewriteRule ^(.*)$ public/$1 [L,R=301]
+</IfModule>
